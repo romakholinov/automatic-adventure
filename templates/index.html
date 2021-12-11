@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Bakery project</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+
+
+
+    <!-- Bootstrap core CSS -->
+<link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Favicons -->
+<link rel="apple-touch-icon" href="/docs/5.1/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="manifest" href="/docs/5.1/assets/img/favicons/manifest.json">
+<link rel="mask-icon" href="/docs/5.1/assets/img/favicons/safari-pinned-tab.svg" color="#7952b3">
+<link rel="icon" href="/docs/5.1/assets/img/favicons/favicon.ico">
+<meta name="theme-color" content="#7952b3">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+
+  <style type="text/css">.backpack.dropzone {
+  font-family: 'SF UI Display', 'Segoe UI';
+  font-size: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
+  height: 150px;
+  font-weight: lighter;
+  color: white;
+  will-change: right;
+  z-index: 2147483647;
+  bottom: 20%;
+  background: #333;
+  position: fixed;
+  user-select: none;
+  transition: left .5s, right .5s;
+  right: 0px; }
+  .backpack.dropzone .animation {
+    height: 80px;
+    width: 250px;
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+  .backpack.dropzone .title::before {
+    content: 'Save to'; }
+  .backpack.dropzone.closed {
+    right: -250px; }
+  .backpack.dropzone.hover .animation {
+    animation: sxt-play-anim-hover 0.91s steps(21);
+    animation-fill-mode: forwards;
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+
+@keyframes sxt-play-anim-hover {
+  from {
+    background-position: 0px; }
+  to {
+    background-position: -5250px; } }
+  .backpack.dropzone.saving .title::before {
+    content: 'Saving to'; }
+  .backpack.dropzone.saving .animation {
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
+    animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
+
+@keyframes sxt-play-anim-saving {
+  100% {
+    background-position: -14750px; } }
+  .backpack.dropzone.saved .title::before {
+    content: 'Saved to'; }
+  .backpack.dropzone.saved .animation {
+    background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
+    animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
+
+@keyframes sxt-play-anim-saved {
+  100% {
+    background-position: -5000px; } }
+</style><style type="text/css">[id^=root], [id^=docs], .cc_cursor, body, .ogdlpmhglpejoiomcodnpjnfgcpmgale_default, body, html, input[type="date"], input[type="time"], input[type="datetime-local"], input[type="month"], input::-webkit-contacts-auto-fill-button, input:read-only {cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAwxJREFUSEu1lE1IFGEYx//POztbeShIF6KDh+gUBG1EWBFIRLcyskO1RR1KMFC3Tdvog6BDX/QFdWjDS0hQFEpWSPZNUNBBsUCNFKHa1R3f2dZVd23Hed94R5OMam13e+bwwAzP/zfPJ3k8nge6ru+JRCIc/8HI4/EIKeVTTdN80WjUyDdDAeSkaE8ymVw7Ojo6kE+IA5hbMB/Jb8MYty1DSrmPc94CwMoHyAFsWV2FeQUehFoOw627VS9Cg4ODx/IG2FxSg82r/GjveYIr9/dDwLKJ6KFhGGW5QpwMFKC81I/iFTraRl7j1MnjMHq7QUQ3iChoGEY0W5AD2LnRj7q6Q+ia68LrKBAd6MO7uxfR2XxLQR4JIc6ZpvksG4gD8NcEsHBrEB+HCfbkTEmRxJvrR9F1rwEg6pdSBk3TbPhXiANY5gtg+Y4gAJoWP9sNdJzfi7dPWmHZY5BSlnHOHwKwZwpyAF5fAN5fAG4G7FwMuD5YuHwmhJedDeiP9Sndw5ZlheLxeHwmkN8CiIDAEiDRkUb3izRsYSOW6MPZu7vBExGLiO7pul45k/NCRUVFcvmug/BuD6qGYsEcwFcskeiy0Pk4Pe0nC2a7UHl1JWIj/er9F8ZYqWEYvX/LZFoG3kLCylkCQ+1pNN5pxtfhATByQdO0Cc9c+DaeQNObK0ilnQoNCCF8pmk+B/Dj5EzjTQGOBYNYOgt435RC/6cIaus3wBofA8CczJxHeWIYt1XZpi4JJyKfYRitv8vEAVQfCKB6Xx1e1aeQSsVx4mYZjKFPYSI6DUBdWCalVCOmPJv0LsaYBkCTUmpE1Mg5d2r3szmAPeV+rFtUjcTIMOpbatHe1yoA+Djnt2YyKRl7oE7FppIafPjyEhcaK2DZaTXvzbmKq/ipW1S6tBxV19akGWNHOOeXAKgscraJJi9aj4+RNoyMxW7btl0Ri8USOStPCjh7oDEdQorPbrfLGw6HzXyJOyVSACKKEtGaTEuTDViVaFAIsc00zafZCGSKocLCwi2maTb9aRMzCWT6/h2LKXEoZV0ocQAAAABJRU5ErkJggg==") 0 0 , auto !important; }[role^=button], button, .cc_pointer, [type="search"]::-webkit-search-cancel-button, a, select, [type="search"]::-webkit-search-decoration, .paper-button, .ytp-progress-bar-container, input[type=submit], :link, :visited, a > *, img, button, ::-webkit-scrollbar-button, .ogdlpmhglpejoiomcodnpjnfgcpmgale_pointer, ::-webkit-file-upload-button, button, .ytp-volume-panel, #myogdlpmhglpejoiomcodnpjnfgcpmgale .icon { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAABMhJREFUSEutlXtsFFUUxr87M/toeaTtzkzZ7daWRii1pSlFoIKAtQiCRPzDQEGgCIlBwBCMAmIVfGCfFkggNFQFhaBUSVegmiIIEqAKiaZQoEJSS1LahZlZtiwN3Z3HNdOXLWwVE25yk8m5M+eX851vziUIv1hBEBZSSr8ghDCGYWzWdb3U7/f7B3h/wDAJdyIIwmqW4bZmJGXD7UiC57dyFRRrZVne+qgAF53Rw9M2vXIIFtaOxWUJYAhXqChKPgD9/0DCVsDzfH28kJxakHcMqqZh0adx4FhrsSzLGx4hYFRqQd5P3QAXONb2qAHdFegaFpV2VrAXwFlCiEeSJO/DyjSwRHxyasGSLokWlMTCZomE3ToIHaF2DcB2QsgtSqmPUnpEUZRWAEY46H/0wJRI7wSkJ2ZjStpcXGk+iTOXj0AURfh8PmiadoEQstwwjKAsy/UAQn1BnYCoqKgElmUzFUU5ZDbxnyZ3AeYXx2L+Mxvw4vjVaPSexUffLEBl5bfYWa/jVOGrMNRgS3fSVpZlX/Z6vU09EOJwOOYQhvFYGCs0IxQghKyjlK5x8yNH9LhoVfkYzMhchtnjVqH5bi02fj4fM7efRoSVg+eNabANHoxh6ZPR8vtxBO/4j0qSNKMXwPO89sRjWWxm0iw0K3U4efFgAEBEvDCK63FRi+9P3OsIYurzY3FPrMPC11ZiVkEV1GBHJ+DZ9YVIfGoeLlQW4tzuLZAkqVd6IggCnZO1AnOy3kRIvYv9v2zCqXoP3PxIdAF0gAESx1rgfNqG8stBtN6UMIh3ItTux7FPlmLSyo3ISMnETU8JdpSV9AfwPF+sG/rbHy6sRqI4Ghf+OomKmjWIHhILUyLK6YjPsMA6zorKRiCg9veKlQHSY4CZQymKNpegfF9pf0BMTEw8wzA140ZMT1k5excIAQ6eKcYNuRHvLqtA0kQOjQ4Op28Cbf38AUSwwHNxgFvRcP2siq+rt+G7M2X9AQDMyfkxpXT90mkFmJyWC1XvgGFtx7Ql8agOMLh8B9Duc7lBgRUpAL2m4uqJEEIdOjy1pTh8rvwBAFwuV6SqqrWxUQnp7+dWIVqMwaRlEaj2EpyXgft/FjsLvJ4CGNc1nK/sAMMBvkAryqqWoMV37YAkSbm9Lup5EARhLqX0wNSxL2HXV1twvH0wzkkAe192CwMsfhxgG1Rc/DEI1tKVocV3De/syQEhTI6iKD8/ADADoigut9ttO3O37gXipnb2o+/SKbB2NHCnTkXDiSAoBWBuAiiBJrz1WTY4jkvzer2XwgJcLhevquo+Sun0eV8eJUPEMZ1JTA5vB/KGUwQaNFyqCXYFzeTdq7ZhPypq8tsopeNlWb4aFmAGeZ5/khCyzzY0OjknvwLDUqcgLRqYGGmgvU7F9T/Ufol7Eq3bk41b/qbDqqrmtbW13R4QYB44nc4ETdOaxNQJKNqxGxNdDlw51IHbN3TQHjf1rYAQLChywm6zb5Yk6b2+tYWdpibE4XCMB/Dr9wd/IIHzqdCC3Xr0/aI7FGnjMK/IbTbjA1mWNz0wTcPNcYfDEccwzJEU94SMZHfWv94vphmqareZd3W+JEmFDwUAwIiiuJFSak7XASvt1ZqQZsMwXlAUpaEv4G9BCRc3WzF3twAAAABJRU5ErkJggg==") 8 0, auto !important; } * {cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAwxJREFUSEu1lE1IFGEYx//POztbeShIF6KDh+gUBG1EWBFIRLcyskO1RR1KMFC3Tdvog6BDX/QFdWjDS0hQFEpWSPZNUNBBsUCNFKHa1R3f2dZVd23Hed94R5OMam13e+bwwAzP/zfPJ3k8nge6ru+JRCIc/8HI4/EIKeVTTdN80WjUyDdDAeSkaE8ymVw7Ojo6kE+IA5hbMB/Jb8MYty1DSrmPc94CwMoHyAFsWV2FeQUehFoOw627VS9Cg4ODx/IG2FxSg82r/GjveYIr9/dDwLKJ6KFhGGW5QpwMFKC81I/iFTraRl7j1MnjMHq7QUQ3iChoGEY0W5AD2LnRj7q6Q+ia68LrKBAd6MO7uxfR2XxLQR4JIc6ZpvksG4gD8NcEsHBrEB+HCfbkTEmRxJvrR9F1rwEg6pdSBk3TbPhXiANY5gtg+Y4gAJoWP9sNdJzfi7dPWmHZY5BSlnHOHwKwZwpyAF5fAN5fAG4G7FwMuD5YuHwmhJedDeiP9Sndw5ZlheLxeHwmkN8CiIDAEiDRkUb3izRsYSOW6MPZu7vBExGLiO7pul45k/NCRUVFcvmug/BuD6qGYsEcwFcskeiy0Pk4Pe0nC2a7UHl1JWIj/er9F8ZYqWEYvX/LZFoG3kLCylkCQ+1pNN5pxtfhATByQdO0Cc9c+DaeQNObK0ilnQoNCCF8pmk+B/Dj5EzjTQGOBYNYOgt435RC/6cIaus3wBofA8CczJxHeWIYt1XZpi4JJyKfYRitv8vEAVQfCKB6Xx1e1aeQSsVx4mYZjKFPYSI6DUBdWCalVCOmPJv0LsaYBkCTUmpE1Mg5d2r3szmAPeV+rFtUjcTIMOpbatHe1yoA+Djnt2YyKRl7oE7FppIafPjyEhcaK2DZaTXvzbmKq/ipW1S6tBxV19akGWNHOOeXAKgscraJJi9aj4+RNoyMxW7btl0Ri8USOStPCjh7oDEdQorPbrfLGw6HzXyJOyVSACKKEtGaTEuTDViVaFAIsc00zafZCGSKocLCwi2maTb9aRMzCWT6/h2LKXEoZV0ocQAAAABJRU5ErkJggg==") 0 0 , auto }a, button, [type^=button], [role^=button]   { cursor: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAABMhJREFUSEutlXtsFFUUxr87M/toeaTtzkzZ7daWRii1pSlFoIKAtQiCRPzDQEGgCIlBwBCMAmIVfGCfFkggNFQFhaBUSVegmiIIEqAKiaZQoEJSS1LahZlZtiwN3Z3HNdOXLWwVE25yk8m5M+eX851vziUIv1hBEBZSSr8ghDCGYWzWdb3U7/f7B3h/wDAJdyIIwmqW4bZmJGXD7UiC57dyFRRrZVne+qgAF53Rw9M2vXIIFtaOxWUJYAhXqChKPgD9/0DCVsDzfH28kJxakHcMqqZh0adx4FhrsSzLGx4hYFRqQd5P3QAXONb2qAHdFegaFpV2VrAXwFlCiEeSJO/DyjSwRHxyasGSLokWlMTCZomE3ToIHaF2DcB2QsgtSqmPUnpEUZRWAEY46H/0wJRI7wSkJ2ZjStpcXGk+iTOXj0AURfh8PmiadoEQstwwjKAsy/UAQn1BnYCoqKgElmUzFUU5ZDbxnyZ3AeYXx2L+Mxvw4vjVaPSexUffLEBl5bfYWa/jVOGrMNRgS3fSVpZlX/Z6vU09EOJwOOYQhvFYGCs0IxQghKyjlK5x8yNH9LhoVfkYzMhchtnjVqH5bi02fj4fM7efRoSVg+eNabANHoxh6ZPR8vtxBO/4j0qSNKMXwPO89sRjWWxm0iw0K3U4efFgAEBEvDCK63FRi+9P3OsIYurzY3FPrMPC11ZiVkEV1GBHJ+DZ9YVIfGoeLlQW4tzuLZAkqVd6IggCnZO1AnOy3kRIvYv9v2zCqXoP3PxIdAF0gAESx1rgfNqG8stBtN6UMIh3ItTux7FPlmLSyo3ISMnETU8JdpSV9AfwPF+sG/rbHy6sRqI4Ghf+OomKmjWIHhILUyLK6YjPsMA6zorKRiCg9veKlQHSY4CZQymKNpegfF9pf0BMTEw8wzA140ZMT1k5excIAQ6eKcYNuRHvLqtA0kQOjQ4Op28Cbf38AUSwwHNxgFvRcP2siq+rt+G7M2X9AQDMyfkxpXT90mkFmJyWC1XvgGFtx7Ql8agOMLh8B9Duc7lBgRUpAL2m4uqJEEIdOjy1pTh8rvwBAFwuV6SqqrWxUQnp7+dWIVqMwaRlEaj2EpyXgft/FjsLvJ4CGNc1nK/sAMMBvkAryqqWoMV37YAkSbm9Lup5EARhLqX0wNSxL2HXV1twvH0wzkkAe192CwMsfhxgG1Rc/DEI1tKVocV3De/syQEhTI6iKD8/ADADoigut9ttO3O37gXipnb2o+/SKbB2NHCnTkXDiSAoBWBuAiiBJrz1WTY4jkvzer2XwgJcLhevquo+Sun0eV8eJUPEMZ1JTA5vB/KGUwQaNFyqCXYFzeTdq7ZhPypq8tsopeNlWb4aFmAGeZ5/khCyzzY0OjknvwLDUqcgLRqYGGmgvU7F9T/Ufol7Eq3bk41b/qbDqqrmtbW13R4QYB44nc4ETdOaxNQJKNqxGxNdDlw51IHbN3TQHjf1rYAQLChywm6zb5Yk6b2+tYWdpibE4XCMB/Dr9wd/IIHzqdCC3Xr0/aI7FGnjMK/IbTbjA1mWNz0wTcPNcYfDEccwzJEU94SMZHfWv94vphmqareZd3W+JEmFDwUAwIiiuJFSak7XASvt1ZqQZsMwXlAUpaEv4G9BCRc3WzF3twAAAABJRU5ErkJggg==") 8 0, auto }</style></head>
+  <body data-new-gr-c-s-check-loaded="14.1040.0" data-gr-ext-installed="">
+
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">This is a project work demonstrating my skills in using Pandas and Plotly libraries for data analysis. Using a bakery dataset as an example, I demonstrated all the skills I learned in the practical classes, analysed the data and wrote a conclusion.</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><a href="https://vk.com/keithviolet" class="text-white">Follow on VK</a></li>
+            <li><a href="https://www.instagram.com/roma_kholinov/?hl=ru" class="text-white">Like on Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="/" class="navbar-brand d-flex align-items-center">
+            <img class="bd-placeholder-img" width="20%" height="20%" src="{{url_for('static', filename='images/bread.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+        <strong>  Bakery Project</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Analysis of bakery data</h1>
+        <p class="lead text-muted">This project shows the sales statistics of various products in one bakery. You can see the dependence of sales on time, days of the week, and a comparison of the sales of food and drinks.</p>
+        <p>
+          <a href="https://www.kaggle.com/sanu12300/bakery-sales-data-2006-19/download" class="btn btn-primary my-2">Download the dataset</a>
+
+          <a href="https://drive.google.com/file/d/1y9-lt-SA0zECQCdd_A-CkEX3m9Smb_0a/view?usp=sharing" class="btn btn-primary my-2">Download Full Analysis (.ipynb)</a>
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+        <div class="col">
+          <div class="card shadow-sm">
+
+
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/cakes.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+
+            <div class="card-body">
+              <p class="card-text">This graph shows the number of cakes sold between 2006 and 2019. The unit segment on the x-axis is 50 days, on the y-axis it is the number of cakes sold.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/cakesLine';">Full screen</button>
+                </div>
+                <small class="text-muted">Line graph</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/pies.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This graph shows the number of pies sold between 2006 and 2019. The unit segment on the x-axis is 50 days, on the y-axis it is the number of pies sold.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/piesLine';">Full screen</button>
+                </div>
+                <small class="text-muted">Line graph</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/cookies.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This graph shows the number of cookies sold between 2006 and 2019. The unit segment on the x-axis is 50 days, on the y-axis it is the number of cookies sold.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/cookiesLine';">Full screen</button>
+                </div>
+                <small class="text-muted">Line graph</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/smoothies.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This graph shows the number of smoothies sold between 2006 and 2019. The unit segment on the x-axis is 50 days, on the y-axis it is the number of smoothies sold.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/smoothiesLine';">Full screen</button>
+                </div>
+                <small class="text-muted">Line graph</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/coffee.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This graph shows the number of cups of coffee sold between 2006 and 2019. The unit segment on the x-axis is 50 days, on the y-axis it is the number of cups of coffee sold.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/coffeeLine';">Full screen</button>
+                </div>
+                <small class="text-muted">Line graph</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/cakesBar.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/cakesBar';">Full screen</button>
+                </div>
+                <small class="text-muted">Bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/piesBar.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/piesBar';">Full screen</button>
+                </div>
+                <small class="text-muted">Bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/cookiesBar.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/cookiesBar';">Full screen</button>
+                </div>
+                <small class="text-muted">Bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/smoothiesBar.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/smoothiesBar';">Full screen</button>
+                </div>
+                <small class="text-muted">Bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/coffeeBar.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/coffeeBar';">Full screen</button>
+                </div>
+                <small class="text-muted">Bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/foodComparison.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/foodComparison';">Full screen</button>
+                </div>
+                <small class="text-muted">Comparison bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img" width="100%" height="100%" src="{{url_for('static', filename='images/drinksComparison.png')}}" aria-hidden="true" preserveaspectratio="xMidYMid slice" focusable="false">
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary"  onclick="location.href='/drinksComparison';">Full screen</button>
+                </div>
+                <small class="text-muted">Comparison bar chart</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="text-muted py-5">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+    <p class="mb-1">Bakery project by Roman Kholinov, 212-1 DSBA </p>
+  </div>
+</footer>
+
+
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
